@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Revaldy Krisna Putra</title>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <style>
+        /* ========== Global Styles ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #14213D;
+            --secondary: #FCA311;
+            --dark: #000000;
+            --light: #ffffff;
+            --gray: #E5E5E5;
+            --text-dark: #14213D;
+            --text-light: #64748B;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: var(--light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            padding: 5rem 1.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--secondary);
+            margin: 0.8rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* ========== Navbar ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--light);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--gray);
+            z-index: 1000;
+            transition: 0.3s;
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 1.8rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--secondary);
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--dark);
+            margin: 4px 0;
+        }
+
+        /* ========== Hero ========== */
+        .hero {
+            background: var(--gradient);
+            color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 0 4rem;
+            /* tambahkan padding kanan kiri */
+            gap: 3rem;
+            /* beri jarak antar teks & foto */
+            flex-wrap: wrap;
+            /* biar rapi di layar kecil */
+        }
+
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+
+        .typed {
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.9rem 1.6rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: var(--light);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary);
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--light);
+            color: var(--light);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+
+        .hero-image img {
+            width: 400px;
+            /* perbesar dari 300px */
+            height: 400px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 6px solid var(--white);
+            box-shadow: 0 0 30px rgba(252, 163, 17, 0.6);
+            /* efek glow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hero-image img:hover {
+            transform: scale(1.05);
+            /* zoom halus saat hover */
+            box-shadow: 0 0 45px rgba(252, 163, 17, 0.8);
+        }
+
+        /* ========== About ========== */
+        .about {
+            background: var(--light);
+        }
+
+        .about-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .about-tabs button {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            background: var(--gray);
+            color: var(--primary);
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+            transition: all 0.3s ease;
+            /* smooth hover */
+        }
+
+        .about-tabs button:hover {
+            background: var(--secondary-color);
+            color: var(--white);
+            transform: scale(1.08);
+            /* sedikit membesar */
+        }
+
+        .about-tabs button.active {
+            background: var(--secondary);
+            color: var(--light);
+            transform: scale(1.1);
+            /* lebih besar saat aktif */
+            animation: fadeSlide 0.5s ease;
+        }
+
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .about-section {
+            display: none;
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+
+        }
+
+        .about-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+            animation: fadeSlide 0.5s ease;
+        }
+
+        /* .skills {
+            margin-top: 1.5rem;
+        }
+
+        .skills span {
+            background: var(--secondary);
+            color: var(--light);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            margin: 0.3rem;
+            font-size: 0.9rem;
+            display: inline-block;
+        } */
+
+        .timeline-item {
+            background: var(--gray);
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+
+        .tech-icons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .tech-item {
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .tech-item iconify-icon {
+            font-size: 50px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .tech-item:hover {
+            transform: scale(1.1);
+        }
+
+        .tech-item:hover iconify-icon {
+            color: var(--secondary);
+            /* satu warna saja */
+        }
+
+        .tech-item p {
+            margin-top: 0.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .tech-item:hover p {
+            color: var(--secondary);
+            /* warna hover sama */
+        }
+
+        /* .progress-bar {
+            background: var(--gray);
+            border-radius: 10px;
+            height: 8px;
+            margin-top: 0.5rem;
+        }
+
+        .progress {
+            height: 100%;
+            background: var(--secondary);
+        } */
+
+        /* ========== Projects ========== */
+        .projects {
+            background: var(--gray);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--light);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            transition: 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 1.2rem;
+            text-align: left;
+        }
+
+        .project-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .project-content p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .project-links a {
+            display: inline-block;
+            margin-right: 0.6rem;
+            background: var(--secondary);
+            color: var(--light);
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .project-links a:hover {
+            background: var(--primary);
+        }
+
+        /* ========== Contact ========== */
+        .contact {
+            background: var(--dark);
+            color: var(--light);
+            text-align: center;
+        }
+
+        .contact h2 {
+            color: var(--secondary);
+        }
+
+        .contact-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-item iconify-icon {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+        }
+
+        .social-links a {
+            color: var(--light);
+            font-size: 1.6rem;
+            transition: 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary);
+        }
+
+        .qr-code {
+            margin-top: 2rem;
+        }
+
+        /* ========== Footer ========== */
+        .footer {
+            background: var(--dark);
+            color: var(--light);
+            text-align: center;
+            padding: 1.2rem;
+            font-size: 0.9rem;
+            border-top: 1px solid #333;
+        }
+
+        /* ========== Responsive ========== */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-image {
+                max-width: 250px;
+                margin: 20px auto 0;
+            }
+
+            .hero-text {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">Portfolio</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="mobile-menu" id="mobileMenu">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Revaldy Krisna Putra</h1>
+            <p class="subtitle"><span class="typed"></span></p>
+            <p class="description">Saya adalah seorang Web Developer dengan fokus pada Front-end Development.</p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">Lihat Portfolio</a>
+                <a href="CV Revaldy Krisna Putra.pdf" class="btn btn-outline">Download CV</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="revo.jpg" alt="Foto Profil">
+        </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2>Tentang Saya</h2>
+            <div class="about-tabs">
+                <button class="tab-btn active" data-tab="profil">Profil</button>
+                <button class="tab-btn" data-tab="timeline">Timeline</button>
+                <button class="tab-btn" data-tab="techstack">Tech Stack</button>
+            </div>
+
+            <div class="about-section active" id="profil">
+                <p style="text-align: justify;">Saya adalah Lulusan S1 Informatika Telkom University Surabaya (IPK 3,68)
+                    dengan pengalaman di Web
+                    Development &
+                    IT
+                    Support. Terbiasa mengembangkan aplikasi berbasis web menggunakan Laravel, PHP,
+                    JavaScript, dan Bootstrap. Memiliki kemampuan pemecahan masalah, komunikasi, serta kerja tim yang
+                    baik,
+                    dan berorientasi pada hasil.</p>
+                <!-- <div class="skills">
+                    <span>HTML</span><span>CSS</span><span>JavaScript</span>
+                    <span>PHP</span><span>Laravel</span><span>Python</span><span>Bootstrap</span>
+                </div> -->
+            </div>
+
+            <div class="about-section" id="timeline">
+
+                <div class="timeline-item">
+                    <h3>IT Internship - PT Triata Mulia Indonesia</h3>
+                    <span>Okt 2025 - Apr 2026</span>
+                    <p>Melakukan pengembangan terhadap website perusahaan dan melakukan perbaikan pada perangkat keras perusahaan.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Freelance IT Support - PT Kation Teknologi Indonesia</h3>
+                    <span>Feb 2025 - Aug 2025</span>
+                    <p>Migrasi domain dan Install Antivirus Seluruh Device Karyawan PT Samator Area Jawa Timur.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Freelance Fullstack Developer (ScrEnMom Project)</h3>
+                    <span>Dec 2024 - Feb 2025</span>
+                    <p>Membuat Website Screening dan Education Ibu Hamil Menggunakan HTML,CSS,Javascript, dan PHP dengan
+                        Framework Bootstrap dan Laravel.</p>
+                </div>
+                <div class="timeline-item">
+                    <h3>Magang Programmer - PT Kuanta Prima Indonesia</h3>
+                    <span>2023</span>
+                    <p>Membuat Website Sekolah Model untuk Manajemen Perusahaan. Menggunakan HTML,CSS,Javascript, dan
+                        PHP dengan Framework Bootstrap dan Laravel.</p>
+                </div>
+            </div>
+
+            <div class="about-section" id="techstack">
+                <div class="tech-icons">
+                    <div class="tech-item">
+                        <iconify-icon icon="mdi:language-html5" width="50" height="50"></iconify-icon>
+                        <p>HTML</p>
+                    </div>
+                    <div class="tech-item">
+                        <iconify-icon icon="mdi:language-css3" width="50" height="50"></iconify-icon>
+                        <p>CSS</p>
+                    </div>
+                    <div class="tech-item">
+                        <iconify-icon icon="mdi:language-javascript" width="50" height="50"></iconify-icon>
+                        <p>JavaScript</p>
+                    </div>
+                    <div class="tech-item">
+                        <iconify-icon icon="mdi:language-php" width="50" height="50"></iconify-icon>
+                        <p>PHP</p>
+                    </div>
+                    <div class="tech-item">
+                        <iconify-icon icon="mdi:laravel" width="50" height="50"></iconify-icon>
+                        <p>Laravel</p>
+                    </div>
+                    <div class="tech-item">
+                        <iconify-icon icon="mdi:language-python" width="50" height="50"></iconify-icon>
+                        <p>Python</p>
+                    </div>
+                    <div class="tech-item">
+                        <iconify-icon icon="mdi:react" width="50" height="50"></iconify-icon>
+                        <p>React</p>
+                    </div>
+                    <div class="tech-item">
+                        <iconify-icon icon="mdi:tailwind" width="50" height="50"></iconify-icon>
+                        <p>Tailwind CSS</p>
+                    </div>
+                    <div class="tech-item">
+                        <iconify-icon icon="mdi:bootstrap" width="50" height="50"></iconify-icon>
+                        <p>Bootstrap</p>
+                    </div>
+                    <div class="tech-item">
+                        <iconify-icon icon="mdi:database" width="50" height="50"></iconify-icon>
+                        <p>MySQL</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="projects" id="projects">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image"><img src="screnmom.png" alt="ScrEnMom"></div>
+                    <div class="project-content">
+                        <h3>ScrEnMom Website Project</h3>
+                        <p>Website untuk screening dan edukasi ibu hamil.</p>
+                        <div class="project-links">
+                            <a href="https://screnmom.my.id/">Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image"><img src="toserba.png" alt="Toserba"></div>
+                    <div class="project-content">
+                        <h3>Toserba Pak Sapardi</h3>
+                        <p>Website untuk memenuhi tugas akhir mata kuliah Web Programming.</p>
+                        <div class="project-links">
+                            <a href="https://github.com/RevaldyKrisna/Website-TokoSerba-Ada">Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image"><img src="NSI.png" alt="NSI"></div>
+                    <div class="project-content">
+                        <h3>PT Nusa Saraya Indonesia</h3>
+                        <p>Website company profile untuk PT Nusa Saraya Indonesia.</p>
+                        <div class="project-links">
+                            <a href="https://www.nusasaraya.co.id">Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image"><img src="saraya.png" alt="NSI"></div>
+                    <div class="project-content">
+                        <h3>PT Saraya Suci Mulia</h3>
+                        <p>Website company profile untuk PT Saraya Suci Mulia.</p>
+                        <div class="project-links">
+                            <a href="https://www.saraya.id/">Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2>Hubungi Saya</h2>
+            <div class="contact-item"><iconify-icon icon="mdi:email"></iconify-icon> revaldy.krisna@gmail.com</div>
+            <div class="contact-item"><iconify-icon icon="mdi:phone"></iconify-icon> +62 812 5243 6270</div>
+            <div class="contact-item"><iconify-icon icon="mdi:map-marker"></iconify-icon> Surabaya, Indonesia</div>
+
+            <div class="social-links">
+                <a href="https://wa.me/6281252436270"><iconify-icon icon="mdi:whatsapp"></iconify-icon></a>
+                <a href="https://www.linkedin.com/in/revaldykrisna/"><iconify-icon
+                        icon="mdi:linkedin"></iconify-icon></a>
+                <a href="https://github.com/RevaldyKrisna"><iconify-icon icon="mdi:github"></iconify-icon></a>
+                <a href="https://instagram.com/revaldykrisnaa"><iconify-icon icon="mdi:instagram"></iconify-icon></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Revaldy Krisna Putra. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Tabs About
+        const tabBtns = document.querySelectorAll(".tab-btn");
+        const sections = document.querySelectorAll(".about-section");
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                tabBtns.forEach(b => b.classList.remove("active"));
+                sections.forEach(sec => {
+                    sec.classList.remove("active");
+                    // reset supaya animasi bisa dimainkan ulang
+                    sec.style.display = "none";
+                });
+
+                btn.classList.add("active");
+                const activeSection = document.getElementById(btn.dataset.tab);
+                activeSection.style.display = "block";
+                setTimeout(() => {
+                    activeSection.classList.add("active");
+                }, 50);
+            });
+        });
+
+        // Navbar Scroll
+        const navbar = document.getElementById("navbar");
+        window.addEventListener("scroll", () => {
+            navbar.classList.toggle("scrolled", window.scrollY > 50);
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenu = document.getElementById("mobileMenu");
+        const navMenu = document.getElementById("navMenu");
+        mobileMenu.addEventListener("click", () => {
+            navMenu.style.display = navMenu.style.display === "flex" ? "none" : "flex";
+            navMenu.style.flexDirection = "column";
+            navMenu.style.gap = "1.2rem";
+            navMenu.style.marginTop = "1rem";
+        });
+
+        // Typed.js
+        new Typed(".typed", {
+            strings: ["Web Developer", "Frontend Enthusiast", "IT Support"],
+            typeSpeed: 70,
+            backSpeed: 50,
+            loop: true,
+        });
+    </script>
+</body>
+
+</html>
